@@ -21,7 +21,7 @@ const SLIDES_CONFIG = [
     id: 2,
     headline: "Collector Bundle — Limited Stock",
     subtext: "Premium figurines and art books. Only 500 units available worldwide.",
-    buttonText: "Grab Bundle",
+    buttonText: "buy now",
     ctaHref: "https://example.com/bundles",
     badge: "LIMITED EDITION",
     image: "/images/anime_collector_shelf_for_limited_bundle.png",
@@ -360,4 +360,21 @@ class HeroSlider {
 // Initialize slider
 document.addEventListener("DOMContentLoaded", () => {
   new HeroSlider("hero-slider", SLIDES_CONFIG);
+});
+
+
+document.querySelectorAll('.slide-cta').forEach(button => {
+  button.addEventListener('click', function(e) {
+    const ripple = document.createElement('span');
+    ripple.classList.add('ripple');
+    this.appendChild(ripple);
+
+    const rect = this.getBoundingClientRect();
+    ripple.style.left = `${e.clientX - rect.left}px`;
+    ripple.style.top = `${e.clientY - rect.top}px`;
+
+    ripple.addEventListener('animationend', () => {
+      ripple.remove();
+    });
+  });
 });

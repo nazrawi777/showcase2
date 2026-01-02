@@ -23,7 +23,6 @@ html, body {
 
 .slide {
   position: absolute;
-  inset: 0;
   width: 100%;
   height: 100%;
   opacity: 0;
@@ -102,6 +101,7 @@ html, body {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  height: 80%;
 }
 
 .slide-badge {
@@ -185,7 +185,7 @@ html, body {
 }
 
 .slide-headline {
-  font-size: clamp(2.5rem, 8vw, 7rem);
+  font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 900;
   text-transform: uppercase;
   line-height: 0.9;
@@ -243,8 +243,7 @@ html, body {
   .slide-timer-desktop {
     display: none;
   }
-}
-
+}/* ================= CTA WRAPPER ================= */
 .slide-cta-wrapper {
   opacity: 0;
   transform: translateY(2rem);
@@ -258,72 +257,87 @@ html, body {
   transform: translateY(0);
 }
 
+/* ================= CTA LINK ================= */
 .slide-cta-link {
   text-decoration: none;
   display: inline-flex;
 }
 
+/* ================= CTA BUTTON ================= */
 .slide-cta {
   position: relative;
-  height: 3.5rem;
-  padding: 0 2rem;
-  border-radius: 0;
+  height: 2.9rem;
+  padding: 0 1.8rem;
+  border-radius: 25px;
   border: none;
-  color: #fff;
+  /* Base color */
+  background-color: #8b5cf6; /* calm green base */
+  color: #ffffff;
+
+  /* Text */
+  letter-spacing: 0.12em;
+  font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.05em;
   text-transform: uppercase;
-  font-size: 1rem;
-  overflow: hidden;
-  transition: transform 0.2s active;
-  box-shadow: 0 10px 40px -10px rgba(0,0,0,0.5);
+
+  /* Layout */
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
   cursor: pointer;
-  transform: skewX(-10deg);
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
+  overflow: hidden;
+
+  /* Glow */
+  box-shadow: 0 0 2px #8b5cf6, 0 0 16px #8b5cf6;
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.slide-cta::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  transform: translateX(-100%);
-  transition: transform 0.5s;
+/* Hover glow effect */
+.slide-cta:hover {
+  transform: scale(0.85);
+  box-shadow: 0 0 12px #8b5cf6, 0 0 24px #8b5cf6;
 }
 
-.slide-cta-link:hover .slide-cta::before {
-  transform: translateX(100%);
-}
-
-.slide-cta:active {
-  transform: skewX(-10deg) scale(0.95);
-}
-
+/* ================= CTA CONTENT ================= */
 .slide-cta span {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  transform: skewX(10deg);
-  position: relative;
-  z-index: 1;
 }
 
+/* ================= CTA ICON ================= */
 .slide-cta-icon {
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 0rem;
+  height: 0.4rem;
 }
 
-.slide-cta.disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
+/* ================= DISABLED / EXPIRED ================= */
+.slide-cta.disabled,
 .slide-cta.expired {
-  opacity: 0.5;
+  opacity: 0.45;
   cursor: not-allowed;
+  filter: grayscale(1);
+  box-shadow: none;
 }
+
+/* ================= RIPPLE EFFECT ================= */
+.slide-cta .ripple {
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(0, 210, 255, 0.0); /* light blue ripple */
+  transform: scale(0);
+  animation: ripple-animation 0.6s linear;
+  pointer-events: none;
+}
+
+@keyframes ripple-animation {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
 
 /* Navigation Controls */
 .slider-controls {
